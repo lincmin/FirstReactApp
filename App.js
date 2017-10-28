@@ -26,11 +26,11 @@ export default class App extends Component<{}> {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
+      city_id: '',
       forecast: {
-        main: '多云',
-        description: '南风',
-        temp: 22
+        main: '',
+        wind_direction: '',
+        temp: null
       }
     }
   }
@@ -38,19 +38,43 @@ export default class App extends Component<{}> {
     let textValue = event.nativeEvent.text;
     console.log('textValue', textValue);
     this.setState({
-      text: textValue
+      city_id: textValue
     });
+    fetch(`http://tj.nineton.cn/Heart/index/all?city=${textValue}`)
+      .then((response) => response.json())
+      .then((responseJSON) => {
+        console.log(responseJSON);
+        this.setState({
+          forecast:
+          {
+            main: responseJSON.weather[0].now.text,
+            wind_direction: responseJSON.weather[0].now.wind_direction,
+            temp: responseJSON.weather[0].now.temperature
+          }
+        });
+      })
+      .catch((error) => {
+        console.warn(error);
+        this.setState({
+          forecast:
+          {
+            main: '无数据',
+            wind_direction: '无数据',
+            temp: '无数据'
+          }
+        });
+      });
   }
   render() {
     return (
       <Image source={require('./src/images/bg.jpeg')} style={styles.backgroundImage}>
         <View style={styles.container}>
           <Text style={styles.welcome}>
-            输入{this.state.text}
+            查询的城市ID: {this.state.city_id}
           </Text>
           <Forecast
             main={this.state.forecast.main}
-            description={this.state.forecast.description}
+            wind_direction={this.state.forecast.wind_direction}
             temp={this.state.forecast.temp}
           />
           <TextInput style={styles.input} onSubmitEditing={this.handleTextChange.bind(this)} />

@@ -13,12 +13,14 @@ class Forecast extends Component {
         return (
             <View>
                 <Text>
-                    {this.props.main}
+                    天气: {this.props.main}
                 </Text>
                 <Text>
-                    描述: {this.props.description}
+                    风向: {this.props.wind_direction}
                 </Text>
-                <Text> {this.props.temp} ° C </Text>
+                <Text>
+                    温度: {this.props.temp} ° C
+                </Text>
             </View>
         );
     };
