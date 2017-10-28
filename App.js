@@ -12,6 +12,7 @@ import {
   TextInput,
   View
 } from 'react-native';
+var Forecast = require('./src/components/Forecast');
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -24,7 +25,12 @@ export default class App extends Component<{}> {
   constructor(props) {
     super(props);
     this.state = {
-      zip: '',
+      text: '',
+      forecast: {
+        main: '多云',
+        description: '南风',
+        temp: 22
+      }
     }
   }
   handleTextChange(event) {
@@ -40,13 +46,12 @@ export default class App extends Component<{}> {
         <Text style={styles.welcome}>
           输入{this.state.text}
         </Text>
+        <Forecast
+          main={this.state.forecast.main}
+          description={this.state.forecast.description}
+          temp={this.state.forecast.temp}
+        />
         <TextInput style={styles.input} onSubmitEditing={this.handleTextChange.bind(this)} />
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
       </View>
     );
   }
