@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  Image
 } from 'react-native';
 var Forecast = require('./src/components/Forecast');
 
@@ -42,17 +43,19 @@ export default class App extends Component<{}> {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          输入{this.state.text}
-        </Text>
-        <Forecast
-          main={this.state.forecast.main}
-          description={this.state.forecast.description}
-          temp={this.state.forecast.temp}
-        />
-        <TextInput style={styles.input} onSubmitEditing={this.handleTextChange.bind(this)} />
-      </View>
+      <Image source={require('./src/images/bg.jpeg')} style={styles.backgroundImage}>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>
+            输入{this.state.text}
+          </Text>
+          <Forecast
+            main={this.state.forecast.main}
+            description={this.state.forecast.description}
+            temp={this.state.forecast.temp}
+          />
+          <TextInput style={styles.input} onSubmitEditing={this.handleTextChange.bind(this)} />
+        </View>
+      </Image>
     );
   }
 }
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'rgba(0,0,0,0)',
   },
   welcome: {
     fontSize: 20,
@@ -80,4 +83,9 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  }
 });
