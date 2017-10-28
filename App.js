@@ -9,23 +9,38 @@ import {
   Platform,
   StyleSheet,
   Text,
+  TextInput,
   View
 } from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
+  'Cmd+D or shake for dev menu',
   android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+  'Shake or press menu button for dev menu',
 });
 
 export default class App extends Component<{}> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      zip: '',
+    }
+  }
+  handleTextChange(event) {
+    let textValue = event.nativeEvent.text;
+    console.log('textValue', textValue);
+    this.setState({
+      text: textValue
+    });
+  }
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          输入{this.state.text}
         </Text>
+        <TextInput style={styles.input} onSubmitEditing={this.handleTextChange.bind(this)} />
         <Text style={styles.instructions}>
           To get started, edit App.js
         </Text>
@@ -38,6 +53,12 @@ export default class App extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
+  input: {
+    fontSize: 20,
+    borderWidth: 2,
+    height: 40,
+    width: 100
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
