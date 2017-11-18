@@ -13,10 +13,9 @@ import {
   View,
   Image
 } from 'react-native';
-import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
+
+import DrawerNav from './src/routers/DrawerNav';
 import TabNav from './src/routers/TabNav';
-import HomeScreen from './src/pages/HomePage';
-import WeatherScreen from './src/pages/WeatherPage';
 
 
 const instructions = Platform.select({
@@ -27,11 +26,7 @@ const instructions = Platform.select({
 });
 
 
-const Navigator = StackNavigator({
-  TabNav: { screen: TabNav },
-  Home: { screen: HomeScreen },
-  Weather: { screen: WeatherScreen },
-});
+const Navigator = DrawerNav;
 
 export default class App extends Component<{}> {
 
