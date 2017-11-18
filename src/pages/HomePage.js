@@ -23,11 +23,11 @@ class HomePage extends Component {
                     title="访问天气查询"
                     onPress={() => navigate('Weather')} />
                 <Text>
-                    传值
+                    about
                 </Text>
                 <Button
-                    title="navigation传name值至AboutPage"
-                    onPress={() => navigate('About', { name: 'lin' })} />
+                    title="访问about页"
+                    onPress={() => navigate('About')} />
             </View>
         );
     };

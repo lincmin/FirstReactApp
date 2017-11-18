@@ -13,7 +13,7 @@ class AboutPage extends Component {
         return (
             <View>
                 <Text>
-                    About,获取传值{this.props.navigation.state.params.name}
+                    About
                 </Text>
             </View>
         );
